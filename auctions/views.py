@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User
+from .models import User, Category, Listing
 
 
 def index(request):
@@ -12,7 +12,11 @@ def index(request):
 
 def createListing(request):
    if request.method == "GET":
-      return render(request, "auctions/create-listing.html")
+      allCategories = Category.objects.all()
+      return render(request, "auctions/create-listing.html", {
+         # name on left in orange is html, right is python
+         "categories": allCategories
+      })
 
 
 def login_view(request):
