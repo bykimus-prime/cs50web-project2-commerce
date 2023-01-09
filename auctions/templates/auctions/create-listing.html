@@ -25,7 +25,7 @@
          <label for="category">Choose a category:</label>
          <select name="category" id="category">
             {% for category in categories %}
-            <option value="categoryChoice">{{ category }}</option>
+            <option value="{{ category }}">{{ category }}</option>
             {% endfor %}
          </select>
       </div>

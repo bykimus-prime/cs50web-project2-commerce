@@ -24,19 +24,26 @@ def createListing(request):
       imageURL = request.POST["imageURL"]
       price = request.POST["price"]
       category = request.POST["category"]
+
       # user info
       currentUser = request.user
+
+      # get content from needed category
+      categoryData = Category.objects.get(categoryName=category)
+
       # create new listing object
       newListing = Listing(
          title=title,
          description=description,
          imageURL=imageURL,
          price=float(price),
-         category=category,
+         category=categoryData,
          owner=currentUser
       )
+
       # insert object into database
       newListing.save()
+
       # redirect to index page
       return HttpResponseRedirect(reverse(index))
 
