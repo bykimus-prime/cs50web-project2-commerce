@@ -3,7 +3,7 @@
 {% block body %}
    <h2>Active Listings</h2>
 
-   <form action="{% url 'displayCategory' %}" method="POST">
+   <form action="{% url 'displayCategory' %}" method="POST" class="my-3">
       {% csrf_token %}
       <label for="category">Choose a category:</label>
          <select name="category" id="category">
