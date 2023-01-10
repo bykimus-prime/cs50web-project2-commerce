@@ -3,7 +3,7 @@
 {% block body %}
    <h2>Active Listings</h2>
 
-   <form action="" method="POST">
+   <form action="{% url 'displayCategory' %}" method="POST">
       {% csrf_token %}
       <label for="category">Choose a category:</label>
          <select name="category" id="category">
@@ -11,6 +11,7 @@
                <option value="{{ category }}">{{ category }}</option>
             {% endfor %}
          </select>
+      <button type="submit" class="btn btn-info">Select Category</button>
    </form>
 
    <div class="row mx-3">
