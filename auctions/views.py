@@ -26,6 +26,12 @@ def displayCategory(request):
          "categories": allCategories
       })
 
+def listing(request, id):
+   listingInfo = Listing.objects.get(pk=id)
+   return render(request, "auctions/listing.html", {
+      "listing":listingInfo
+   })
+
 def createListing(request):
    if request.method == "GET":
       allCategories = Category.objects.all()
