@@ -2,6 +2,17 @@
 
 {% block body %}
    <h2>Active Listings</h2>
+
+   <form action="" method="POST">
+      {% csrf_token %}
+      <label for="category">Choose a category:</label>
+         <select name="category" id="category">
+            {% for category in categories %}
+               <option value="{{ category }}">{{ category }}</option>
+            {% endfor %}
+         </select>
+   </form>
+
    <div class="row mx-3">
       {% for listing in listings %}
          <div class="card mx-3" style="width: 18rem;">
