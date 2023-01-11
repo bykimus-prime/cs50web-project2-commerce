@@ -28,17 +28,23 @@ def displayCategory(request):
 
 def listing(request, id):
    listingInfo = Listing.objects.get(pk=id)
-   isListingWatchlisted = False
+   isListingWatchlisted = request.user in listingInfo.watchlist.all()
    return render(request, "auctions/listing.html", {
       "listing": listingInfo,
       "isListingWatchlisted": isListingWatchlisted
    })
 
-def removeFromWatchlist(request, id):
-   return
-
 def addToWatchlist(request, id):
-   return
+   listingInfo = Listing.objects.get(pk=id)
+   currentUser = request.user
+   listingInfo.watchlist.add(currentUser)
+   return HttpResponseRedirect(reverse("listing", args=(id, )))
+
+def removeFromWatchlist(request, id):
+   listingInfo = Listing.objects.get(pk=id)
+   currentUser = request.user
+   listingInfo.watchlist.remove(currentUser)
+   return HttpResponseRedirect(reverse("listing", args=(id, )))
 
 def createListing(request):
    if request.method == "GET":
