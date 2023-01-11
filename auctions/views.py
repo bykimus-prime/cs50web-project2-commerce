@@ -28,7 +28,7 @@ def displayCategory(request):
 
 def listing(request, id):
    listingInfo = Listing.objects.get(pk=id)
-   isListingWatchlisted = True
+   isListingWatchlisted = False
    return render(request, "auctions/listing.html", {
       "listing": listingInfo,
       "isListingWatchlisted": isListingWatchlisted
