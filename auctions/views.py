@@ -34,6 +34,9 @@ def listing(request, id):
       "isListingWatchlisted": isListingWatchlisted
    })
 
+def displayWatchlist(request):
+   return
+
 def addToWatchlist(request, id):
    listingInfo = Listing.objects.get(pk=id)
    currentUser = request.user
