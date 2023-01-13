@@ -37,7 +37,10 @@
    {% endif %}
    <ul class="list-group">
       {% for comment in allComments %}
-         <li class="list-group-item">{{ comment.message }}</li>
+         <li class="list-group-item">
+            {{ comment.message }}
+            <p><em>Posted by <strong>{{ comment.author }}</strong></em></p>
+         </li>
       {% endfor %}
    </ul>
 
