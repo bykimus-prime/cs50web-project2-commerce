@@ -29,9 +29,11 @@ def displayCategory(request):
 def listing(request, id):
    listingInfo = Listing.objects.get(pk=id)
    isListingWatchlisted = request.user in listingInfo.watchlist.all()
+   allComments = Comment.objects.filter(listing=listingInfo)
    return render(request, "auctions/listing.html", {
       "listing": listingInfo,
-      "isListingWatchlisted": isListingWatchlisted
+      "isListingWatchlisted": isListingWatchlisted,
+      "allComments": allComments
    })
 
 def addComment(request, id):
@@ -44,6 +46,8 @@ def addComment(request, id):
       listing=listingInfo,
       message=message
    )
+
+   newComment.save()
 
    return HttpResponseRedirect(reverse("listing", args=(id, )))
 

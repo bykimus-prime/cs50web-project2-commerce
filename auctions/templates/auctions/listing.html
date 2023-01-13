@@ -35,5 +35,10 @@
          </div>
       </form>
    {% endif %}
+   <ul class="list-group">
+      {% for comment in allComments %}
+         <li class="list-group-item">{{ comment.message }}</li>
+      {% endfor %}
+   </ul>
 
 {% endblock %}
