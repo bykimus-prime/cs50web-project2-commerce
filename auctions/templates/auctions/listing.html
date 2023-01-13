@@ -24,4 +24,16 @@
    <p>Owner: {{ listing.owner }}</p>
    <h5>${{ listing.price }}</h5>
 
+   <h3>Comments</h3>
+   {% if user.is_authenticated %}
+      <form action="{% url 'addComment' id=listing.id %}" method="POST">
+         {% csrf_token %}
+         <div class="form-group">
+            <label for="price">Add Comment</label>
+            <input type="text" name="newComment" placeholder="Add new comment...">
+            <button type="submit" class="btn btn-warning">Add</button>
+         </div>
+      </form>
+   {% endif %}
+
 {% endblock %}
