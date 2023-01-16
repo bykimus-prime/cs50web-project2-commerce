@@ -30,10 +30,28 @@ def listing(request, id):
    listingInfo = Listing.objects.get(pk=id)
    isListingWatchlisted = request.user in listingInfo.watchlist.all()
    allComments = Comment.objects.filter(listing=listingInfo)
+   isOwner = request.user.username == listingInfo.owner.username
    return render(request, "auctions/listing.html", {
       "listing": listingInfo,
       "isListingWatchlisted": isListingWatchlisted,
-      "allComments": allComments
+      "allComments": allComments,
+      "isOwner": isOwner
+   })
+
+def closeAuction(request, id):
+   listingInfo = Listing.objects.get(pk=id)
+   listingInfo.isActive = False
+   listingInfo.save()
+   isListingWatchlisted = request.user in listingInfo.watchlist.all()
+   allComments = Comment.objects.filter(listing=listingInfo)
+   isOwner = request.user.username == listingInfo.owner.username
+   return render(request, "auctions/listing.html", {
+       "listing": listingInfo,
+       "isListingWatchlisted": isListingWatchlisted,
+       "allComments": allComments,
+       "isOwner": isOwner,
+       "update": True,
+       "message": "The auction has closed."
    })
 
 def addBid (request, id):
@@ -41,6 +59,7 @@ def addBid (request, id):
    listingInfo = Listing.objects.get(pk=id)
    isListingWatchlisted = request.user in listingInfo.watchlist.all()
    allComments = Comment.objects.filter(listing=listingInfo)
+   isOwner = request.user.username == listingInfo.owner.username
    if int(newBid) > listingInfo.price.bid:
       updateBid = Bid(user=request.user, bid=int(newBid))
       updateBid.save()
@@ -51,7 +70,8 @@ def addBid (request, id):
          "message": "Bid was successful",
          "update": True,
          "isListingWatchlisted": isListingWatchlisted,
-         "allComments": allComments
+         "allComments": allComments,
+         "isOwner": isOwner
       })
    else:
       return render(request, "auctions/listing.html", {
@@ -59,7 +79,8 @@ def addBid (request, id):
           "message": "Bid attempt failed",
           "update": False,
           "isListingWatchlisted": isListingWatchlisted,
-          "allComments": allComments
+          "allComments": allComments,
+          "isOwner": isOwner
       })
  
 
