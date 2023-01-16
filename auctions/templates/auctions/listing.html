@@ -15,6 +15,12 @@
       {% endif %}
    </div>
 
+   {% if not listing.isActive and user == listing.price.user %}
+   <div class="alert alert-success" role="alert">
+      You won the auction.
+   </div>
+   {% endif %}
+
    <div class="row mx-2">
       {% if user.is_authenticated and listing.isActive %}
 

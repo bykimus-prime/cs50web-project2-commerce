@@ -67,7 +67,7 @@ def addBid (request, id):
       listingInfo.save()
       return render(request, "auctions/listing.html", {
          "listing": listingInfo,
-         "message": "Bid was successful",
+         "message": "Bid was successful.",
          "update": True,
          "isListingWatchlisted": isListingWatchlisted,
          "allComments": allComments,
@@ -76,7 +76,7 @@ def addBid (request, id):
    else:
       return render(request, "auctions/listing.html", {
           "listing": listingInfo,
-          "message": "Bid attempt failed",
+          "message": "Bid attempt failed.",
           "update": False,
           "isListingWatchlisted": isListingWatchlisted,
           "allComments": allComments,
