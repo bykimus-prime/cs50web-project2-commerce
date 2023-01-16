@@ -36,6 +36,10 @@ def listing(request, id):
       "allComments": allComments
    })
 
+def addBid (request, id):
+   return
+ 
+
 def addComment(request, id):
    currentUser = request.user
    listingInfo = Listing.objects.get(pk=id)
@@ -89,7 +93,7 @@ def createListing(request):
       # get content from needed category
       categoryData = Category.objects.get(categoryName=category)
       # create bid object
-      bid = Bid(bid=float(price), user=currentUser)
+      bid = Bid(bid=int(price), user=currentUser)
       bid.save()
       # create new listing object
       newListing = Listing(
